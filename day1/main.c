@@ -136,16 +136,16 @@ int findTopThree(int *buffer, size_t size_buffer)
 
 int main()
 {
-    int* list = malloc(5000 * sizeof(int));
+    size_t ALLOC_SIZE = 500;
+    
+    int* list = malloc(ALLOC_SIZE * sizeof(int));
     if(!list)
     {
         fprintf(stderr, "Error allocating memory\n");
         exit(1);
     }
     initializeArray("input", list);
-
     
-    size_t ALLOC_SIZE = 500;
     int max = findMax(list, ALLOC_SIZE);
 
     fprintf(stdout, "Max: %d\n", max);
