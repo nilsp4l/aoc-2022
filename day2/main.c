@@ -218,5 +218,7 @@ int main()
 
     fprintf(stdout, "Score: %u\n", calculate_score(buff1, buff2, ALLOC_SIZE));
     fprintf(stdout, "Secret Score: %u\n", calculate_secret_score(buff1, buff2, ALLOC_SIZE));
+    free(buff1);
+    free(buff2);
     return 0;
 }
