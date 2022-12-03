@@ -58,14 +58,11 @@ int count_doubles(char *buff, size_t size)
         current = *(buff + i);
         for (int j = half; j < size && j < len; j++)
         {
-            if (*(buff + j) == current)
+            if (*(buff + j) == current && !contains(current, already_counted, size))
             {
-                if (!contains(current, already_counted, size))
-                {
-                    counter += convert_char_to_value(current);
-                    *(already_counted + a_counted_index) = current;
-                    a_counted_index++;
-                }
+                counter += convert_char_to_value(current);
+                *(already_counted + a_counted_index) = current;
+                a_counted_index++;
             }
         }
     }
@@ -73,13 +70,13 @@ int count_doubles(char *buff, size_t size)
     return counter;
 }
 
-int count_till_plus(char* buff, size_t size)
+int count_till_plus(char *buff, size_t size)
 {
     int counter = 0;
     int len = strlen(buff);
-    for(int i = 0; i < size && i < len; i++)
+    for (int i = 0; i < size && i < len; i++)
     {
-        if(*(buff + i) != '+')
+        if (*(buff + i) != '+')
         {
             counter++;
         }
@@ -91,10 +88,9 @@ int count_till_plus(char* buff, size_t size)
     return -1;
 }
 
-
 int count_doubles_in_3_lines(char *buff, size_t size)
 {
-    
+
     char already_counted[size];
 
     clearArray(already_counted, size);
@@ -112,13 +108,13 @@ int count_doubles_in_3_lines(char *buff, size_t size)
         {
             if (*(buff + j) == current)
             {
-                for(int k = first + second + 1; k < size && k < (first + second + third + 2); k++)
+                for (int k = first + second + 1; k < size && k < (first + second + third + 2); k++)
                 {
                     if (*(buff + k) == current && !contains(current, already_counted, size))
                     {
-                    counter += convert_char_to_value(current);
-                    *(already_counted + a_counted_index) = current;
-                    a_counted_index++;
+                        counter += convert_char_to_value(current);
+                        *(already_counted + a_counted_index) = current;
+                        a_counted_index++;
                     }
                 }
             }
@@ -128,14 +124,12 @@ int count_doubles_in_3_lines(char *buff, size_t size)
     return counter;
 }
 
-
-
 int load_lines_and_count(char *file_name, char *buff, size_t size)
 {
     char current = 0;
     FILE *input = fopen(file_name, "r");
 
-    if(!input)
+    if (!input)
     {
         exit(1);
     }
@@ -161,17 +155,15 @@ int load_lines_and_count(char *file_name, char *buff, size_t size)
     return count;
 }
 
-
 int load_3_lines_and_count(char *file_name, char *buff, size_t size)
 {
     char current = 0;
     FILE *input = fopen(file_name, "r");
-    
-    if(!input)
+
+    if (!input)
     {
         exit(1);
     }
-
 
     int count = 0;
     int flag = 0;
@@ -192,7 +184,6 @@ int load_3_lines_and_count(char *file_name, char *buff, size_t size)
             flag++;
         }
 
-
         if ((current == '\n' || current == EOF) && flag == 3)
         {
             count += count_doubles_in_3_lines(buff, size);
@@ -203,7 +194,6 @@ int load_3_lines_and_count(char *file_name, char *buff, size_t size)
     }
     return count;
 }
-
 
 int main()
 {
@@ -220,6 +210,6 @@ int main()
     fprintf(stdout, "First part: %d\n", count);
     fprintf(stdout, "Second part: %d\n", count_3);
     free(buff);
-    
+
     return 0;
 }
