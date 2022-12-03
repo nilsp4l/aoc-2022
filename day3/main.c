@@ -50,7 +50,7 @@ int count_doubles(char *buff, size_t size)
 
     int a_counted_index = 0;
 
-    int half = len / 2;
+    int half = len >> 1;
     int counter = 0;
     char current = 0;
     for (int i = 0; i < size && i < half; i++)
