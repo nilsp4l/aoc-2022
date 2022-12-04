@@ -63,6 +63,11 @@ int count_double_assignment(char *path_name, int *int_buff, char* char_buff, siz
 {
     FILE* input = fopen(path_name, "r");
     
+    if(!input)
+    {
+        exit(1);
+    }
+    
     int counter = 0;
     char current = 0;
 
